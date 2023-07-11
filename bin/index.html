@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Voting System</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Online Voting System</h1>
+        <div class="admin-panel">
+            <h2>Admin Panel</h2>
+            <form action="admin-login" method="post">
+                <label for="admin-username">Username:</label>
+                <input type="text" id="admin-username" name="admin-username"><br>
+                <label for="admin-password">Password:</label>
+                <input type="password" id="admin-password" name="admin-password"><br>
+                <input type="submit" value="Login">
+            </form>
+            <form action="add-candidate" method="post">
+                <h3>Add Election Candidate</h3>
+                <label for="candidate-name">Name:</label>
+                <input type="text" id="candidate-name" name="candidate-name"><br>
+                <input type="submit" value="Add Candidate">
+            </form>
+            <form action="open-voting" method="post">
+                <h3>Open Voting</h3>
+                <input type="submit" value="Open Voting">
+            </form>
+            <form action="close-voting" method="post">
+                <h3>Close Voting</h3>
+                <input type="submit" value="Close Voting">
+            </form>
+            <form action="show-results" method="post">
+                <h3>Show Election Results</h3>
+                <input type="submit" value="Show Results">
+            </form>
+        </div>
+        <div class="voter-panel">
+            <h2>Voter Panel</h2>
+            <form action="voter-login" method="post">
+                <label for="voter-name">Name:</label>
+                <input type="text" id="voter-name" name="voter-name"><br>
+                <label for="voter-password">Password:</label>
+                <input type="password" id="voter-password" name="voter-password"><br>
+                <input type="submit" value="Login">
+            </form>
+            <form action="register-voter" method="post">
+                <h3>Register Voter</h3>
+                <label for="new-voter-name">Name:</label>
+                <input type="text" id="new-voter-name" name="new-voter-name"><br>
+                <label for="new-voter-password">Password:</label>
+                <input type="password" id="new-voter-password" name="new-voter-password"><br>
+                <input type="submit" value="Register Voter">
+            </form>
+            <form action="cast-vote" method="post">
+                <h3>Cast Vote</h3>
+                <label for="candidate-name">Candidate:</label>
+                <select id="candidate-name" name="candidate-name">
+                    <option value="">Select a candidate</option>
+                    <% for (Candidate candidate : votingSystem.getElectionCandidates()) { %>
+                        <option value="<%= candidate.getName() %>"><%= candidate.getName() %></option>
+                    <% } %>
+                </select><br>
+                <input type="submit" value="Cast Vote" <% if (!votingSystem.isVotingOpen()) { %>disabled<% } %>>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
